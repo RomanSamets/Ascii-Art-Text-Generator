@@ -1,0 +1,90 @@
+                        .o.             .o.       ooooooooooooo    oooooooooo.
+                       .888.           .888.      8'   888   `8    `888'   `Y8b
+                      .8"888.         .8"888.          888          888      888  .ooooo.   .ooooo.
+                     .8' `888.       .8' `888.         888          888      888 d88' `88b d88' `"Y8
+                    .88ooo8888.     .88ooo8888.        888          888      888 888   888 888
+                   .8'     `888.   .8'     `888.       888          888     d88' 888   888 888   .o8
+                  o88o     o8888o o88o     o8888o     o888o        o888bood8P'   `Y8bod8P' `Y8bod8P'
+------------------------------------------------------------------------------------------------------------------------
+
+AAT - Ascii Art Text Generator
+
+-------------------------------------------------------------
+FOR USING 
+just open terminal and write aat and string. Example:
+aat hi
+
+OR
+you can open terminal, write a   aat    and then put in a string
+
+-------------------------------------------------------------
+OPTIONS FOR AAT
+Syntax:
+
+  aat --option --option "str"
+
+1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE -opt1 -opt2
+2.RECOMENDED USE "" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
+
+All Options:
+  --f "nameOfFont" font name
+  --h print a documentation for you
+  --p0 put Off space between symbols
+  --p1 put On space between symbols
+  --Red change output text color
+  --Blue change output text color
+  --Yellow change output text color
+  --Cyan change output text color
+  --Purple change output text color
+  --Black change output text color
+  --Green change output text color
+  --l print output by left side
+  --r print output by right side
+  --c print output by center
+  --lk0 like a comment mode off
+  --lk1 like a comment mode on
+  --rp0 doesn't replace symbol space to dot
+  --rp1 replace symbol space to dot
+
+-------------------------------------------------------------
+FOR CREATING YOUR OWN FONT 
+YOU NEED FOLLOW THIS SPECIFICATION:
+
+1 ALL FONTS MUST be sorted by
+A a B b C c ... X x Y y Z z 0 1 2 3 ... 9 . , : ; ' " ! ? / | \ ( ) [ ] { } < > + - * = & ^ % $ # @ _ ~ ` and the last symbol it's just space
+MAX CHARACTERS = 95
+
+2 ALL FONTS COULD HAVE MAX CHARACTERS 95 
+  BUT FONTS CAN HAVE LESS THAN 95
+  BUT CAN'T HAVE MORE THAN 95 SYMBOLS
+
+3 ALL FONTS FOR AAT HAVE A FILE EXSTENTION .af (ascii font)
+
+-------------------------------------------------------------
+Example:
+
+IN Fonts folder is a file template.af in this file you can see this:
+
+char NameOfFont[95][10][30] {
+	{ symbol
+		in this lines you write a your symbol
+		{"          "}, this strings which have a space symbols it's padding you need configure there for your symbol and test them
+		{"          "},
+		{"          "},
+
+		{"    /\\    "},
+		{"   /  \\   "},
+		{"  / /\\ \\  "},
+		{" / ____ \\ "},
+		{"/_/    \\_\\"},
+
+		{"          "},
+		{"          "}
+	},
+	...
+
+NameOfYourFont[ ][ ][ ] <- and the last it's value string 
+			         ^  ^
+			         |  |_line
+			         |
+		     alphabet symbol 
