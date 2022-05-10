@@ -45,6 +45,8 @@ All Options:
   --lk1 like a comment mode on
   --rp0 doesn't replace symbol space to dot
   --rp1 replace symbol space to dot
+  --wt set a width equals a terminal width
+  --w integerValue set a width by hand 
 
 -------------------------------------------------------------
 FOR CREATING YOUR OWN FONT 
@@ -83,8 +85,8 @@ char NameOfFont[95][10][30] {
 	},
 	...
 
-NameOfYourFont[ ][ ][ ] <- and the last it's value string 
-			         ^  ^
-			         |  |_line
-			         |
-		     alphabet symbol 
+NameOfYourFont[ ][ ][ ][ ] <- and the last it's value string 
+			            ^  ^
+			            |  |_line
+			            |
+		      alphabet symbol 

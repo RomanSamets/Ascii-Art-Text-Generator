@@ -21,7 +21,7 @@ int WindowWidth = 120;
 
 int usedFont = 0;
 
-char* ReducedDocumentation = "AAT - Ascii Art Text Generator\n\tThis utility create a cool visual ascii symbols\nSyntax: aat --option --option\"str\"\n\n1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE -opt1 -opt2\n2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\nAll Options:\n\t--help print a documentation for you\n\t--f \"FONTname\" set a FONT for string\n\t--p0 put Off space between symbols\n\t--p1 put On space between symbols\n\t--Red change output text color\n\t--Blue change output text color\n\t--Yellow change output text color\n\t--Cyan change output text color\n\t--Purple change output text color\n\t--Black change output text color\n\t--Green change output text color\n\t--l print output by left side\n\t--r print output by right side\n\t--c print output by center";
+char* ReducedDocumentation = "AAT - Ascii Art Text Generator\n\tThis utility create a cool visual ascii symbols\nSyntax: aat --option --option\"str\"\n\n1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2\n2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\nAll Options:\n\t--help print a reduced documentation for you\n\t--f \"fontName\" set a font for output string\n\t--p0 put Off space between symbols\n\t--p1 put On space between symbols\n\t--Red change output text color\n\t--Blue change output text color\n\t--Yellow change output text color\n\t--Cyan change output text color\n\t--Purple change output text color\n\t--Black change output text color\n\t--Green change output text color\n\t--l print output by left side\n\t--r print output by right side\n\t--c print output by center\n\tFor more information check a Documentaion file";
 
 int printAsciiLogo(char* userStr);
 
@@ -137,7 +137,7 @@ int main(int argc, char const *argv[]) {
 	printAsciiLogo(userStr);
 
 
-	//system("pause");
+	system("pause");
 
 	return 0;
 }
