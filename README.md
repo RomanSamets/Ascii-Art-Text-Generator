@@ -15,7 +15,7 @@ AAT its utility which can print in terminal beautiful ascii art text.
 ## For using
 Open terminal and write `aat hi` OR just write a `aat` and then put in a string. Example:
 
-![Gif](https://github.com/RomanSamets/Ascii-Art-Text-Generator/raw/main/Documentation/VideoExample.gif)
+![Gif](https://github.com/RomanSamets/Ascii-Art-Text-Generator/raw/main/Docs/VideoExample.gif)
 --------------------------------------
 ## Options for AAT
 ### Syntax: 
@@ -47,7 +47,7 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
   * `--wt` set a width equals a terminal width
   * `--w integerValue` set a width by hand 
 
-> #### For creating your own font read a doc file in Documentation folder
+> #### For creating your own font read a documentation file in Docs folder
 
 ## Links
 http://www.figlet.org/fontdb.cgi - site where I take a fonts
