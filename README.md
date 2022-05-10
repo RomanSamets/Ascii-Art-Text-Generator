@@ -20,7 +20,7 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 ## Options for AAT
 ### Syntax: 
      
-     - aat --option --option "str"
+      aat --option --option "str"
 ### Rules:
 1. ALL ARGUMENTS MUST BE SEPARATED BY SPACE `--opt1 --opt2`
 2. RECOMENDED USE `""` FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
