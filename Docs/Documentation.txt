@@ -67,26 +67,19 @@ Example:
 
 IN Fonts folder is a file template.af in this file you can see this:
 
-char NameOfFont[95][10][30] {
-	{ symbol
-		in this lines you write a your symbol
-		{"          "}, this strings which have a space symbols it's padding you need configure there for your symbol and test them
-		{"          "},
-		{"          "},
+{ symbol
+	in this lines you write a your symbol
+	{"          "}, this strings which have a space symbols it's padding you need configure there for your symbol and test them
+	{"          "},
+	{"          "},
 
-		{"    /\\    "},
-		{"   /  \\   "},
-		{"  / /\\ \\  "},
-		{" / ____ \\ "},
-		{"/_/    \\_\\"},
+	{"    /\\    "},
+	{"   /  \\   "},
+	{"  / /\\ \\  "},
+	{" / ____ \\ "},
+	{"/_/    \\_\\"},
 
-		{"          "},
-		{"          "}
-	},
-	...
-
-NameOfYourFont[ ][ ][ ][ ] <- and the last it's value string 
-			            ^  ^
-			            |  |_line
-			            |
-		      alphabet symbol 
+	{"          "},
+	{"          "}
+},
+...
