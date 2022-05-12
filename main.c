@@ -4,28 +4,24 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-const unsigned short symbolWidth = 30;
-const unsigned short symbolHeight = 10;
+int printAsciiLogo(char* userStr);
 
-int SIZE = 20;
+#define SIZE 20
 int TerminalWidth = 120;
+
+int NextValue = 0;
+
+char* ReducedDocumentation = "AAT - Ascii Art Text Generator\n\tThis utility create a cool visual ascii symbols\nSyntax: aat --option --option\"str\"\n\n1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2\n2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\nAll Options:\n\t--help print a reduced documentation for you\n\t--f \"fontName\" set a font for output string\n\t--p0 put Off space between symbols\n\t--p1 put On space between symbols\n\t--Red change output text color\n\t--Blue change output text color\n\t--Yellow change output text color\n\t--Cyan change output text color\n\t--Purple change output text color\n\t--Black change output text color\n\t--Green change output text color\n\t--l print output by left side\n\t--r print output by right side\n\t--c print output by center\n\tFor more information check a Documentaion file";
 
 int PaddingEnable = 1;
 int Color = 0;
 int Outputview = 1;
 int LikeAComment = 0;
 int ReplaceSpace = 0;
-char replacedSymbol = '.';
-int NextValue = 0;
-int WindowWidth = 120;
-
 int usedFont = 0;
+int WindowWidth = 135;
 
-char* ReducedDocumentation = "AAT - Ascii Art Text Generator\n\tThis utility create a cool visual ascii symbols\nSyntax: aat --option --option\"str\"\n\n1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2\n2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\nAll Options:\n\t--help print a reduced documentation for you\n\t--f \"fontName\" set a font for output string\n\t--p0 put Off space between symbols\n\t--p1 put On space between symbols\n\t--Red change output text color\n\t--Blue change output text color\n\t--Yellow change output text color\n\t--Cyan change output text color\n\t--Purple change output text color\n\t--Black change output text color\n\t--Green change output text color\n\t--l print output by left side\n\t--r print output by right side\n\t--c print output by center\n\tFor more information check a Documentaion file";
-
-int printAsciiLogo(char* userStr);
-
-#include "AllFonts.dat"
+#include "Fonts.dat"
 
 // int countsOfFonts = 2;
 // char Fonts[countsOfFonts][95][10][30];
@@ -44,28 +40,29 @@ int printAsciiLogo(char* userStr);
 
 int main(int argc, char const *argv[]) {
 	char userStr[SIZE];
-
+	
 	for (int i = 1; i < argc; ++i) {
 		if (NextValue == 1) {
-
 			if ( isalpha(argv[i][0]) ) {
 				size_t size = strlen(argv[i]);
 				char userInput[size];
 				memccpy(userInput, argv[i], '\0', size);
 
-				if (strcmp(userInput, "roman") == 0) {
-					usedFont=1;
-				} else if (strcmp(userInput, "Big") == 0) {
+				if ((strcmp(userInput, "Big")-1) == 0) {
 					usedFont=0;
 				}
+				if ((strcmp(userInput, "roman")-1) == 0) {
+					usedFont=1;
+				}  
 
-            } else if (isdigit(argv[i][0])) {
+            } else if (isdigit(argv[i][0]) && atoi(argv[i]) < 9) {
+            	usedFont=atoi(argv[i]);
+            } else if (isdigit(argv[i][0]) && atoi(argv[i]) > 29) {
 				size_t size = strlen(argv[i]);
 				char buf[size];
 				memccpy(buf, argv[i], '\0', size);
-	            WindowWidth = atoi(buf);
-	            
-			} 
+	            WindowWidth = atoi(buf);  
+			}
 
 			NextValue = 0;
 			continue;
@@ -136,14 +133,30 @@ int main(int argc, char const *argv[]) {
 
 	printAsciiLogo(userStr);
 
-
 	system("pause");
 
 	return 0;
 }
 
 int printAsciiLogo(char* userStr) {
-	if (userStr[0] == 1 ) {printf("\033[0m");return 0;}
+	if (userStr[0] == 1 ) {return 0;}
+
+	const unsigned short symbolWidth = 30;
+	const unsigned short symbolHeight = 10;
+
+	char replacedSymbol = '.';
+
+	unsigned short countOfSymbols = strlen(userStr);
+	char paddingSymbol;
+
+	short asciiUserIndexSymbol[SIZE];
+
+	int nextSymbol = 0;
+	int nextLine = 0;
+	int spaces=0;
+	int nonAvaible = 0;
+	int savedSymbol = 0;
+	int totalAsciiStrWidth = 0;
 
 	// Set Color for output
 	switch(Color) {
@@ -159,41 +172,30 @@ int printAsciiLogo(char* userStr) {
 
 	if (LikeAComment == 1) {printf("/***\n");}
 
-	unsigned short countOfSymbols = strlen(userStr);
-	char paddingSymbol[1];
-
-	if (ReplaceSpace == 1) {paddingSymbol[0] = replacedSymbol;} 
-	else {paddingSymbol[0] = ' ';}
-
-	short asciiUserIndexSymbol[SIZE];   
- 
-	for (int csi = 0; csi < countOfSymbols; ++csi) {
+	if (ReplaceSpace == 1) {paddingSymbol = replacedSymbol;} 
+	else {paddingSymbol = ' ';}
+ 	
+ 	for (int csi = 0; csi < countOfSymbols; ++csi) {
 		#include "symbolsDefinition.ini"
 	}
 
-	int nextSymbol = 0;
-	int nextLine = 0;
-	int spaces=0;
-
-	//WORD WRAP
-	int totalAsciiStrWidth = 0;
 	for (int i = 0; i < countOfSymbols; ++i) {
 		if ( PaddingEnable == 1) {
-			totalAsciiStrWidth += strlen( data[usedFont][asciiUserIndexSymbol[i]][nextLine]) + strlen(paddingSymbol);
+			totalAsciiStrWidth += strlen( data[usedFont][asciiUserIndexSymbol[i]][nextLine]) + 1 + 1;
+			if (totalAsciiStrWidth > WindowWidth) {nonAvaible++;}
 		} else {
 			totalAsciiStrWidth += strlen( data[usedFont][asciiUserIndexSymbol[i]][nextLine]);
+			if (totalAsciiStrWidth > WindowWidth) {nonAvaible++;}
 		}
 	}
-
-	if (totalAsciiStrWidth > WindowWidth) { return 0;}
 
 	// Print Function
 	for (int i = 0; i < symbolHeight; ++i) {
 		
-		if(Outputview==1) {for (int i = 0; i < (((round(WindowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%s", paddingSymbol);}}
-		if(Outputview==2) {for (int i = 0; i < ((round(WindowWidth - totalAsciiStrWidth))-3); ++i) {printf("%s", paddingSymbol);}}
+		if(Outputview==1) {for (int i = 0; i < (((round(WindowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
+		if(Outputview==2) {for (int i = 0; i < ((round(WindowWidth - totalAsciiStrWidth))-3); ++i) {printf("%c", paddingSymbol);}}
 		
-		for (int i = 0; i < countOfSymbols; ++i) {
+		for (int i = 0; i < countOfSymbols-nonAvaible; ++i) {
 			for (int i = 0; i < strlen( data[usedFont][asciiUserIndexSymbol[nextSymbol]][nextLine]); ++i) {
 				if (ReplaceSpace == 1) {
 					if ( data[usedFont][asciiUserIndexSymbol[nextSymbol]][nextLine][i] == ' ') {
@@ -203,21 +205,50 @@ int printAsciiLogo(char* userStr) {
 				printf("%c", data[usedFont][asciiUserIndexSymbol[nextSymbol]][nextLine][i]);	
 			}
 			
-			if ( PaddingEnable == 1) {printf("%s", paddingSymbol);} 
+			if ( PaddingEnable == 1) {printf("%c", paddingSymbol);} 
 			else {printf("");}
 
 			++nextSymbol;
-		}
-
+			savedSymbol = nextSymbol;
+		} 
 		printf("\n");
 		++nextLine;
 		nextSymbol=0;	
 	}
 
-	if (LikeAComment == 1) {printf("***\\\n");}
+	if (totalAsciiStrWidth > WindowWidth) {
+		int nonAvaibleSymbol = savedSymbol;
 
-	//Reset color Settings
-	printf("\033[0m");
+		for (int i = 0; i < symbolHeight; ++i) {
+			if(Outputview==1) {for (int i = 0; i < (((round(WindowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
+			if(Outputview==2) {for (int i = 0; i < ((round(WindowWidth - totalAsciiStrWidth))-3); ++i) {printf("%c", paddingSymbol);}}
+
+			for (int i = 0; i < nonAvaible; ++i) {
+				for (int i = 0; i < strlen( data[usedFont][asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine]); ++i) {
+					if (ReplaceSpace == 1) {
+						if ( data[usedFont][asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i] == ' ') {
+							data[usedFont][asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i] = replacedSymbol;
+						}	
+					}
+					printf("%c", data[usedFont][asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i]);	
+				}
+				
+				if ( PaddingEnable == 1) {printf("%c", paddingSymbol);} 
+				else {printf("");}
+
+				++nonAvaibleSymbol;
+			}
+			printf("\n");
+			++nextLine;
+			nonAvaibleSymbol=savedSymbol;	
+		}
+
+		if (LikeAComment == 1) {printf("***/\n");}
+
+		//Reset color Settings
+		printf("\033[0m");
+	}
+		
 }
 
 
