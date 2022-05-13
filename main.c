@@ -7,7 +7,7 @@
 int printAsciiLogo(char* userStr);
 
 #define SIZE 20
-int TerminalWidth = 120;
+int TerminalWidth = 130;
 
 int NextValue = 0;
 
@@ -19,7 +19,7 @@ int Outputview = 1;
 int LikeAComment = 0;
 int ReplaceSpace = 0;
 int usedFont = 0;
-int WindowWidth = 135;
+int WindowWidth = 130;
 
 #include "Fonts.dat"
 
@@ -48,10 +48,10 @@ int main(int argc, char const *argv[]) {
 				char userInput[size];
 				memccpy(userInput, argv[i], '\0', size);
 
-				if ((strcmp(userInput, "Big")-1) == 0) {
+				if ((strncmp(userInput, "roman", size)) == 0) {
 					usedFont=0;
 				}
-				if ((strcmp(userInput, "roman")-1) == 0) {
+				if ((strncmp(userInput, "roman", size)) == 0) {
 					usedFont=1;
 				}  
 
@@ -132,8 +132,14 @@ int main(int argc, char const *argv[]) {
 	} 
 
 	printAsciiLogo(userStr);
-
-	system("pause");
+	
+	#ifdef _WIN32
+		system("pause");
+	#endif
+	#ifdef linux
+		printf("Press any key...");
+		int pause = getchar();
+	#endif
 
 	return 0;
 }
@@ -206,7 +212,7 @@ int printAsciiLogo(char* userStr) {
 			}
 			
 			if ( PaddingEnable == 1) {printf("%c", paddingSymbol);} 
-			else {printf("");}
+			else {}
 
 			++nextSymbol;
 			savedSymbol = nextSymbol;
@@ -234,7 +240,7 @@ int printAsciiLogo(char* userStr) {
 				}
 				
 				if ( PaddingEnable == 1) {printf("%c", paddingSymbol);} 
-				else {printf("");}
+				else {}
 
 				++nonAvaibleSymbol;
 			}

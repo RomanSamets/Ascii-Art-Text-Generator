@@ -3,5 +3,5 @@ ForGithubTemplate.jpg
 *.exe
 *.o
 *.lib
-*.a
-AAT_libsource.c
+aat
+CompileLibWindows.bat
