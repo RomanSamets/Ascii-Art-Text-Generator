@@ -1,4 +1,14 @@
 # Ascii Art Text Generator
+![languages count](https://img.shields.io/github/languages/count/RomanSamets/Ascii-Art-Text-Generator)
+![total downloads](https://img.shields.io/github/downloads/RomanSamets/Ascii-Art-Text-Generator/total)
+![total issues count](https://img.shields.io/github/issues/RomanSamets/Ascii-Art-Text-Generator)
+![total pr count](https://img.shields.io/github/issues-pr/RomanSamets/Ascii-Art-Text-Generator)
+![forks count](https://img.shields.io/github/forks/RomanSamets/Ascii-Art-Text-Generator)
+![license](https://img.shields.io/github/license/RomanSamets/Ascii-Art-Text-Generator)
+![lines of code](https://img.shields.io/tokei/lines/github/RomanSamets/Ascii-Art-Text-Generator)
+![stars count](https://img.shields.io/github/stars/RomanSamets/Ascii-Art-Text-Generator)
+
+------------------------
                                          .o.             .o.       ooooooooooooo
                                         .888.           .888.      8'   888   `8
                                        .8"888.         .8"888.          888
