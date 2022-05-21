@@ -37,7 +37,7 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 
 ### All options:
   * `--f "fontName"` set a font for output string
-  * `--help` print a reduced documentation for you
+  * `--help` print a reduced documentation
   * `--p0` put Off space between symbols
   * `--p1` put On space between symbols
   * `--Red` change output text color
