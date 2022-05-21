@@ -3,5 +3,12 @@ ForGithubTemplate.jpg
 *.exe
 *.o
 *.lib
+*.a
 aat
 CompileLibWindows.bat
+CompileLibForLinux.sh
+Fonts/BigOldVer.af
+Fonts/romanOldVer.af
+
+Fonts.dat
+symbolsDefinition.ini

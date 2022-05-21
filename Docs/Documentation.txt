@@ -15,7 +15,7 @@ just open terminal and write aat and string. Example:
 aat hi
 
 OR
-you can open terminal, write a   aat    and then put in a string
+you can open terminal, write a  "aat"   and then put in a string
 
 -------------------------------------------------------------
 OPTIONS FOR AAT
@@ -23,12 +23,12 @@ Syntax:
 
   aat --option --option "str"
 
-1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE -opt1 -opt2
+1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2
 2.RECOMENDED USE "" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
 
 All Options:
-  --f "nameOfFont" font name
-  --h print a documentation for you
+  --f "nameOfFont" font name. Font name must be without .af extension. For example: --f test
+  --help print a documentation for you
   --p0 put Off space between symbols
   --p1 put On space between symbols
   --Red change output text color
@@ -46,7 +46,10 @@ All Options:
   --rp0 doesn't replace symbol space to dot
   --rp1 replace symbol space to dot
   --wt set a width equals a terminal width
-  --w integerValue set a width by hand 
+  --w integerValue set a width by hand
+  In beta:
+  --s0 turn off a smashing mode
+  --s1 turn on a smashing mode 
 
 -------------------------------------------------------------
 FOR CREATING YOUR OWN FONT 
@@ -67,19 +70,85 @@ Example:
 
 IN Fonts folder is a file template.af in this file you can see this:
 
-{ symbol
-	in this lines you write a your symbol
-	{"          "}, this strings which have a space symbols it's padding you need configure there for your symbol and test them
-	{"          "},
-	{"          "},
-
-	{"    /\\    "},
-	{"   /  \\   "},
-	{"  / /\\ \\  "},
-	{" / ____ \\ "},
-	{"/_/    \\_\\"},
-
-	{"          "},
-	{"          "}
-},
+All symbols have a 10 height and MAX width = 30
+.........%
+.........%
+.........%
+.........%
+.........%
+.........%
+.........%
+.........%
+.........%
+.........% // end of first symbol
+ddddddddd% // start of second symbol
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
+ddddddddd%
 ...
+
+---------------------------
+How to use your own font
+
+For using your font you need:
+1 add your font file to Fonts/ directory
+2 open terminal
+3 and exec a aat --f fontName
+!!! fontName must be without .af
+
+Example:
+aat --f test Hiii
+
+---------------------------
+For using like a library
+1 Paste Fonts/ directory in your project
+2 Take a lib_AAT.a and AAT.h
+3 Now use aat in your project. Example:
+  - For using a aat you need call a printAsciiArtText function with 2 arguments. Example:
+
+    printAsciiArtText("hiii", aat_parameters);
+
+    OR
+
+    printAsciiArtText("hiii", aat);    
+
+    ! ARGUMENTS MUST BE 2
+    ! FIRST IT'S A STRING
+    ! SECOND IT'S A STRUCTURE OF PARAMETERS
+    note: aat it's a define. #define aat aat_parameters. aat_parameters it's a struct
+
+    For using options you can do:
+      aat.<optionName> = <value>;
+      printAsciiArtText("hiii", aat);
+
+    Options In AAT LIBRARY:
+      1  fontName = <Value string: "roman">
+      2  isPaddingEnable = <Values: 1 or 0>
+      3  color = <Value: 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7>
+         0 - default
+         1 - Red
+         2 - Green
+         3 - Yello
+         4 - Blue
+         5 - Purpl
+         6 - Cyan
+         7 - Black
+      4  outputAlignment = <Values: 0 or 1 or 2> 
+        0 it's left 
+        1 it's center 
+        2 it's right
+      5  isLikeAComment = <Values: 1 or 0>
+      6  isChangeSpace = <Values: 1 or 0>
+      7  windowWidth = <integerValue: 123>
+      8  replacedSymbol = <Value 1 symbol: 'd'>      
+
+4 Compile your project with this library 
+  gcc -c AAT_libsource.c -o AAT.o && ar rcs lib_AAT<win or lin>.a AAT.o
+
+5 Enjoy :)
