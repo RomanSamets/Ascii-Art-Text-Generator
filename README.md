@@ -60,4 +60,4 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 > #### For creating your own font read a documentation file in Docs folder
 
 ## Links
-http://www.figlet.org/fontdb.cgi - site where I take a fonts
+http://www.figlet.org/fontdb.cgi - site where I take a fonts 
