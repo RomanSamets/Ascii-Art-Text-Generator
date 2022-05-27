@@ -18,14 +18,14 @@ void parseData(int symbols, int symbolHeight, int symbolWidth, FILE* sourceFile,
 char* reducedDocumentation = 
             "AAT - Ascii Art Text Generator\n"
             "\tThis utility create a cool visual ascii symbols\n"
-            "Syntax: aat --option --option\"str\"\n\n"
-            "1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2\n"
+            "Syntax: aat -option -option OR aat: --option --option\"str\"\n\n"
+            "1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE\n"
             "2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\n"
             "All Options:\n"
             "\t--help print a reduced documentation for you\n"
-            "\t--f \"fontName\" set a font for output string. Font name must be without .af extension. For example: --f test\n"
-            "\t--p0 put Off space between symbols\n"
-            "\t--p1 put On space between symbols\n"
+            "\t-f \"fontName\" set a font for output string. Font name must be without .af extension. For example: --font test\n"
+            "\t-p0 put Off space between symbols\n"
+            "\t-p1 put On space between symbols\n"
             "\t--Red change output text color\n"
             "\t--Blue change output text color\n"
             "\t--Yellow change output text color\n"
@@ -33,9 +33,9 @@ char* reducedDocumentation =
             "\t--Purple change output text color\n"
             "\t--Black change output text color\n"
             "\t--Green change output text color\n"
-            "\t--l print output by left side\n"
-            "\t--r print output by right side\n"
-            "\t--c print output by center\n"
+            "\t-left print output by left side\n"
+            "\t-right print output by right side\n"
+            "\t-center print output by center\n"
             "\tFor more information check a Documentaion file";
 
 char* fileToOpen;
@@ -82,29 +82,29 @@ int main(int argc, char const *argv[]) {
             continue;
         }   
 
-        if (   strcmp(argv[i], "--c")      !=0 
-            && strcmp(argv[i], "--l")      !=0 
-            && strcmp(argv[i], "--r")      !=0
-            && strcmp(argv[i], "--p0")     !=0
-            && strcmp(argv[i], "--p1")     !=0 
-            && strcmp(argv[i], "--help")   !=0
-            && strcmp(argv[i], "--lk0")    !=0
-            && strcmp(argv[i], "--lk1")    !=0
-            && strcmp(argv[i], "--Red")    !=0
-            && strcmp(argv[i], "--Green")  !=0
-            && strcmp(argv[i], "--Yellow") !=0
-            && strcmp(argv[i], "--Blue")   !=0
-            && strcmp(argv[i], "--Purple") !=0
-            && strcmp(argv[i], "--Cyan")   !=0
-            && strcmp(argv[i], "--Black")  !=0
-            && strcmp(argv[i], "--f")      !=0
-            && strcmp(argv[i], "--rp0")    !=0
-            && strcmp(argv[i], "--rp1")    !=0
-            && strcmp(argv[i], "--wt")     !=0
-            && strcmp(argv[i], "--w")      !=0
-            && strcmp(argv[i], "--s0")     !=0
-            && strcmp(argv[i], "--s1")     !=0
-            && isNextValue                 !=1 ) {
+        if (strcmp(argv[i], "--center")    !=0 && strcmp(argv[i], "-c")!=0   &&
+            strcmp(argv[i], "--left")      !=0 && strcmp(argv[i], "-l")!=0   &&
+            strcmp(argv[i], "--right")     !=0 && strcmp(argv[i], "-r")!=0   &&
+            strcmp(argv[i], "--padding0")  !=0 && strcmp(argv[i], "-p0")!=0  &&
+            strcmp(argv[i], "--padding1")  !=0 && strcmp(argv[i], "-p1")!=0  &&
+            strcmp(argv[i], "--help")      !=0 && strcmp(argv[i], "-h")!=0   &&
+            strcmp(argv[i], "--likeAcom0") !=0 && strcmp(argv[i], "-lk0")!=0 &&
+            strcmp(argv[i], "--likeAcom1") !=0 && strcmp(argv[i], "-lk1")!=0 &&
+            strcmp(argv[i], "--Red")       !=0                               &&
+            strcmp(argv[i], "--Green")     !=0                               &&
+            strcmp(argv[i], "--Yellow")    !=0                               &&
+            strcmp(argv[i], "--Blue")      !=0                               &&
+            strcmp(argv[i], "--Purple")    !=0                               &&
+            strcmp(argv[i], "--Cyan")      !=0                               &&
+            strcmp(argv[i], "--Black")     !=0                               &&
+            strcmp(argv[i], "--file")      !=0 && strcmp(argv[i], "-f")!=0   &&
+            strcmp(argv[i], "--replace0")  !=0 && strcmp(argv[i], "-rp0")!=0 &&
+            strcmp(argv[i], "--replace1")  !=0 && strcmp(argv[i], "-rp1")!=0 &&
+            strcmp(argv[i], "--widthTerm") !=0 && strcmp(argv[i], "-wt")!=0  &&
+            strcmp(argv[i], "--width")     !=0 && strcmp(argv[i], "-w")!=0   &&
+            strcmp(argv[i], "--smashing0") !=0 && strcmp(argv[i], "-s0")!=0  &&
+            strcmp(argv[i], "--smashing1") !=0 && strcmp(argv[i], "-s1")!=0  &&
+            isNextValue                    !=1 ) {
             
             for (int j = 0; j < strlen(argv[i]); ++j) {
                 if (argc > 1 ) {
@@ -114,14 +114,14 @@ int main(int argc, char const *argv[]) {
             }
         }
 
-        if (strcmp(argv[i], "--c")==0) {outputAlignment = 1;}
-        if (strcmp(argv[i], "--l")==0) {outputAlignment = 0;}
-        if (strcmp(argv[i], "--r")==0) {outputAlignment = 2;}
-        if (strcmp(argv[i], "--p0")==0) {isPaddingEnable = 0;}
-        if (strcmp(argv[i], "--p1")==0) {isPaddingEnable = 1;}
-        if (strcmp(argv[i], "--help")==0) {printf("%s",reducedDocumentation);return 0;}
-        if (strcmp(argv[i], "--lk0")==0) {isLikeAComment = 0;}
-        if (strcmp(argv[i], "--lk1")==0) {isLikeAComment = 1;}
+        if (strcmp(argv[i], "--center")==0 || strcmp(argv[i], "-c") == 0) {outputAlignment = 1;}
+        if (strcmp(argv[i], "--left")==0 || strcmp(argv[i], "-l") == 0) {outputAlignment = 0;}
+        if (strcmp(argv[i], "--right")==0 || strcmp(argv[i], "-r") == 0) {outputAlignment = 2;}
+        if (strcmp(argv[i], "--padding0")==0 || strcmp(argv[i], "-p0") == 0) {isPaddingEnable = 0;}
+        if (strcmp(argv[i], "--padding1")==0 || strcmp(argv[i], "-p1") == 0) {isPaddingEnable = 1;}
+        if (strcmp(argv[i], "--help")==0 || strcmp(argv[i], "-h") == 0) {printf("%s",reducedDocumentation);return 0;}
+        if (strcmp(argv[i], "--likeAcom0")==0 || strcmp(argv[i], "-lk0") == 0) {isLikeAComment = 0;}
+        if (strcmp(argv[i], "--likeAcom1")==0 || strcmp(argv[i], "-lk1") == 0) {isLikeAComment = 1;}
         if (strcmp(argv[i], "--Red")==0) {color=1;}
         if (strcmp(argv[i], "--Green")==0) {color=2;}
         if (strcmp(argv[i], "--Yellow")==0) {color=3;}
@@ -129,16 +129,16 @@ int main(int argc, char const *argv[]) {
         if (strcmp(argv[i], "--Purple")==0) {color=5;}
         if (strcmp(argv[i], "--Cyan")==0) {color=6;}
         if (strcmp(argv[i], "--Black")==0) {color=7;}
-        if (strcmp(argv[i], "--rp1")==0) {isChangeSpace=1;}
-        if (strcmp(argv[i], "--rp0")==0) {isChangeSpace=0;}
-        if (strcmp(argv[i], "--s0")==0) {isSmashing=0;}
-        if (strcmp(argv[i], "--s1")==0) {isSmashing=1;}
-        if (strcmp(argv[i], "--wt")==0) {windowWidth=terminalWidth;}
-        if (strcmp(argv[i], "--w")==0) {
+        if (strcmp(argv[i], "--replace1")==0 || strcmp(argv[i], "-rp1") == 0) {isChangeSpace=1;}
+        if (strcmp(argv[i], "--replace0")==0 || strcmp(argv[i], "-rp0") == 0) {isChangeSpace=0;}
+        if (strcmp(argv[i], "--smashing0")==0 || strcmp(argv[i], "-s0") == 0) {isSmashing=0;}
+        if (strcmp(argv[i], "--smashing1")==0 || strcmp(argv[i], "-s1") == 0) {isSmashing=1;}
+        if (strcmp(argv[i], "--widthTerm")==0 || strcmp(argv[i], "-wt") == 0) {windowWidth=terminalWidth;}
+        if (strcmp(argv[i], "--width")==0 || strcmp(argv[i], "-w") == 0) {
             isNextValue = 1;
             continue;
         }
-        if (strcmp(argv[i], "--f")==0) {
+        if (strcmp(argv[i], "--font")==0 || strcmp(argv[i], "-f")==0) {
             isNextValue = 1;
             continue;
         }

@@ -30,16 +30,16 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 ## Options for AAT
 ### Syntax: 
      
-      aat --option --option "str"
+      aat -option -option "str" OR aat --option aat --option
 ### Rules:
-1. ALL ARGUMENTS MUST BE SEPARATED BY SPACE `--opt1 --opt2`
+1. ALL ARGUMENTS MUST BE SEPARATED BY SPACE
 2. RECOMENDED USE `""` FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
 
 ### All options:
-  * `--f "fontName"` set a font for output string
-  * `--help` print a reduced documentation
-  * `--p0` put Off space between symbols
-  * `--p1` put On space between symbols
+  * `-f "fontName"` OR `--font` set a font for output string
+  * `-h` OR `--help` print a reduced documentation
+  * `-p0` OR `--padding0` put Off space between symbols
+  * `-p1` OR `--padding1` put On space between symbols
   * `--Red` change output text color
   * `--Blue` change output text color
   * `--Yellow` change output text color
@@ -47,15 +47,15 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
   * `--Purple` change output text color
   * `--Black` change output text color
   * `--Green` change output text color
-  * `--l` print output by left side
-  * `--r` print output by right side
-  * `--c` print output by center
-  * `--lk0` like a comment mode off
-  * `--lk1` like a comment mode on
-  * `--rp0` doesn't replace symbol space to dot
-  * `--rp1` replace symbol space to dot
-  * `--wt` set a width equals a terminal width
-  * `--w integerValue` set a width by hand 
+  * `-l` OR `--left` print output by left side
+  * `-r` OR `--right` print output by right side
+  * `-c` OR `--center` print output by center
+  * `-lk0` OR `--likeAcom0` like a comment mode off
+  * `-lk1` OR `--likeAcom1` like a comment mode on
+  * `-rp0` OR `--replace0` doesn't replace symbol space to dot
+  * `-rp1` OR `--replace1` replace symbol space to dot
+  * `-wt` OR `--widthTerm` set a width equals a terminal width
+  * `-w integerValue` OR `--width` set a width by hand 
 
 > #### For creating your own font read a documentation file in Docs folder
 

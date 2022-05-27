@@ -21,16 +21,16 @@ you can open terminal, write a  "aat"   and then put in a string
 OPTIONS FOR AAT
 Syntax:
 
-  aat --option --option "str"
+  aat --option --option "str" OR aat -option -option "str"
 
-1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE --opt1 --opt2
+1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE
 2.RECOMENDED USE "" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
 
 All Options:
-  --f "nameOfFont" font name. Font name must be without .af extension. For example: --f test
-  --help print a documentation for you
-  --p0 put Off space between symbols
-  --p1 put On space between symbols
+  -f "nameOfFont" font name. Font name must be without .af extension. For example: --font test
+  -h print a documentation for you
+  -p0 put Off space between symbols
+  -p1 put On space between symbols
   --Red change output text color
   --Blue change output text color
   --Yellow change output text color
@@ -38,18 +38,18 @@ All Options:
   --Purple change output text color
   --Black change output text color
   --Green change output text color
-  --l print output by left side
-  --r print output by right side
-  --c print output by center
-  --lk0 like a comment mode off
-  --lk1 like a comment mode on
-  --rp0 doesn't replace symbol space to dot
-  --rp1 replace symbol space to dot
-  --wt set a width equals a terminal width
-  --w integerValue set a width by hand
+  -l print output by left side
+  -r print output by right side
+  -c print output by center
+  -lk0 like a comment mode off
+  -lk1 like a comment mode on
+  -rp0 doesn't replace symbol space to dot
+  -rp1 replace symbol space to dot
+  -wt set a width equals a terminal width
+  -w integerValue set a width by hand
   In beta:
-  --s0 turn off a smashing mode
-  --s1 turn on a smashing mode 
+  -s0 turn off a smashing mode
+  -s1 turn on a smashing mode 
 
 -------------------------------------------------------------
 FOR CREATING YOUR OWN FONT 
@@ -99,11 +99,11 @@ How to use your own font
 For using your font you need:
 1 add your font file to Fonts/ directory
 2 open terminal
-3 and exec a aat --f fontName
+3 and exec a aat -f fontName
 !!! fontName must be without .af
 
 Example:
-aat --f test Hiii
+aat -f test Hiii
 
 ---------------------------
 For using like a library
