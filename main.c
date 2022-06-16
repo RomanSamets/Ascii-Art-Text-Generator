@@ -113,10 +113,7 @@ int main(int argc, char const *argv[]) {
                 continue;
             }
             if (isNextValue != true) {
-                size_t size = strlen(argv[i]);
-                char buf[size];
-                memccpy(buf, argv[i], '\0', size);
-                strcpy(userStr, buf);
+                strcpy(userStr, argv[i]);
             }
         }    
     }
