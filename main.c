@@ -48,70 +48,87 @@ int main(int argc, char const *argv[]) {
                 aatParameters.outputAlignment = LEFT;
                 continue;
             }
+            
             if (strcmp(argv[i], "--center") == 0 || strcmp(argv[i], "-c") == 0) {
                 aatParameters.outputAlignment = CENTER;
                 continue;
             }
+            
             if (strcmp(argv[i], "--right") == 0 || strcmp(argv[i], "-r") == 0) {
                 aatParameters.outputAlignment = RIGHT;
                 continue;
             }
+            
             if (strcmp(argv[i], "--padding1") == 0 || strcmp(argv[i], "-p1") == 0) {
                 aatParameters.isPaddingEnable = ON;
                 continue;
             }
+            
             if (strcmp(argv[i], "--likeAcom1") == 0 || strcmp(argv[i], "-lk1") == 0) {
                 aatParameters.isLikeAComment = ON;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Red") == 0 || strcmp(argv[i], "--red") == 0) {
                 aatParameters.color=RED;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Green") == 0 || strcmp(argv[i], "--green") == 0) {
                 aatParameters.color=GREEN;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Yellow") == 0 || strcmp(argv[i], "--yellow") == 0) {
                 aatParameters.color=YELLOW;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Blue") == 0 || strcmp(argv[i], "--blue") == 0) {
                 aatParameters.color = BLUE;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Purple") == 0 || strcmp(argv[i], "--purple") == 0) {
                 aatParameters.color = PURPLE;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Cyan") == 0 || strcmp(argv[i], "--cyan") == 0) {
                 aatParameters.color = CYAN;
                 continue;
             }
+            
             if (strcmp(argv[i], "--Black") == 0 || strcmp(argv[i], "--black") == 0) {
                 aatParameters.color = BLACK;
                 continue;
             }
+            
             if (strcmp(argv[i], "--replace1") == 0 || strcmp(argv[i], "-rp1") == 0) {
                 aatParameters.isChangeSpace = ON;
                 continue;
             }
+            
             if (strcmp(argv[i], "--smashing1") == 0 || strcmp(argv[i], "-s1") == 0) {
                 aatParameters.isSmashing = ON;
                 continue;
             }
+            
             if (strcmp(argv[i], "--help") == 0 || strcmp(argv[i], "-h") == 0) {
                 printf("%s", reducedDocumentation);
                 return EXIT_SUCCESS;
             }
+            
             if (strcmp(argv[i], "--width") == 0 || strcmp(argv[i], "-w") == 0) {
                 isNextValue = true;
                 continue;
             }
+            
             if (strcmp(argv[i], "--font") == 0 || strcmp(argv[i], "-f") == 0) {
                 isNextValue = true;
                 continue;
             }
+            
             if (isNextValue != true) {
                 strcpy(userStr, argv[i]);
             }
