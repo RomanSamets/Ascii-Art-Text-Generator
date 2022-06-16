@@ -64,31 +64,31 @@ int main(int argc, char const *argv[]) {
                 aatParameters.isLikeAComment = ON;
                 continue;
             }
-            if (strcmp(argv[i], "--Red") ==0 ) {
+            if (strcmp(argv[i], "--Red") == 0 || strcmp(argv[i], "--red") == 0) {
                 aatParameters.color=RED;
                 continue;
             }
-            if (strcmp(argv[i], "--Green") == 0) {
+            if (strcmp(argv[i], "--Green") == 0 || strcmp(argv[i], "--green") == 0) {
                 aatParameters.color=GREEN;
                 continue;
             }
-            if (strcmp(argv[i], "--Yellow") == 0) {
+            if (strcmp(argv[i], "--Yellow") == 0 || strcmp(argv[i], "--yellow") == 0) {
                 aatParameters.color=YELLOW;
                 continue;
             }
-            if (strcmp(argv[i], "--Blue") == 0) {
+            if (strcmp(argv[i], "--Blue") == 0 || strcmp(argv[i], "--blue") == 0) {
                 aatParameters.color = BLUE;
                 continue;
             }
-            if (strcmp(argv[i], "--Purple")== 0) {
+            if (strcmp(argv[i], "--Purple") == 0 || strcmp(argv[i], "--purple") == 0) {
                 aatParameters.color = PURPLE;
                 continue;
             }
-            if (strcmp(argv[i], "--Cyan") == 0) {
+            if (strcmp(argv[i], "--Cyan") == 0 || strcmp(argv[i], "--cyan") == 0) {
                 aatParameters.color = CYAN;
                 continue;
             }
-            if (strcmp(argv[i], "--Black") == 0) {
+            if (strcmp(argv[i], "--Black") == 0 || strcmp(argv[i], "--black") == 0) {
                 aatParameters.color = BLACK;
                 continue;
             }
