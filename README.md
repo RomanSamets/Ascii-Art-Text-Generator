@@ -35,7 +35,7 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 1. ALL ARGUMENTS MUST BE SEPARATED BY SPACE
 2. RECOMENDED USE `""` FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
 
-### All options:
+### Options:
   * `--font "fontName"` OR `-f "fontName"` set a font for output string
   * `--help` OR `-h` print a reduced documentation
   * `--padding1` OR `-p1` put On space between symbols
