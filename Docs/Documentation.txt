@@ -30,19 +30,18 @@ All Options:
   -f "nameOfFont" font name. Font name must be without .af extension. For example: --font test
   -h print a documentation for you
   -p1 put On space between symbols
-  --Red change output text color
-  --Blue change output text color
-  --Yellow change output text color
-  --Cyan change output text color
-  --Purple change output text color
-  --Black change output text color
-  --Green change output text color
-  -l print output by left side
-  -r print output by right side
-  -c print output by center
+  --red OR --Red change output text color
+  --green OR --Green change output text color
+  --yellow OR --Yellow change output text color
+  --blue OR --Blue change output text color
+  --purple OR --Purple change output text color
+  --cyan OR --Cyan change output text color
+  --black OR --Black change output text color
+  --left OR -l print output by left side
+  --right OR -r print output by right side
+  --center OR -c print output by center
   -lk1 like a comment mode on
   -rp1 replace symbol space to dot
-  -wt set a width equals a terminal width
   -w integerValue set a width by hand
   
   In beta:
