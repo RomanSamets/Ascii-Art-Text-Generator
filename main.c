@@ -4,9 +4,9 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define PAUSE_ENABLE 0
-
 #include "main.h"
+
+#define PAUSE_ENABLE OFF
 
 int main(int argc, char const *argv[]) {
     FILE* sourceFile = NULL;
