@@ -4,6 +4,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 
+#define PAUSE_ENABLE 0
+
 #include "main.h"
 
 int main(int argc, char const *argv[]) {
@@ -129,12 +131,14 @@ int main(int argc, char const *argv[]) {
 
     printAsciiArtText(userStr, font);
     
-    #ifdef _WIN32
-        system("pause");
-    #endif
-    #ifdef linux
-        printf("Press X to win..."); //Press any key...
-        int pause = getchar();
+    #if PAUSE_ENABLE == ON
+        #ifdef _WIN32
+            system("pause");
+        #endif
+        #ifdef linux
+            printf("Press X to win..."); //Press any key...
+            int pause = getchar();
+        #endif
     #endif
 
     return EXIT_SUCCESS;

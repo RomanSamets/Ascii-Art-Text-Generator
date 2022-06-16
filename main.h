@@ -29,7 +29,7 @@ enum alignmentModes {
     LEFT,
     CENTER,
     RIGHT,
-    
+
     left=0,
     center,
     right
@@ -52,9 +52,9 @@ char* reducedDocumentation =
             "Syntax: aat -option -option OR aat: --option --option\"str\"\n\n"
             "1.ALL ARGUMENTS MUST BE SEPARATED BY SPACE\n"
             "2.RECOMENDED USE \"\" FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE\n\n"
-            "All Options:\n"
+            "Options:\n"
             "\t--help print a reduced documentation for you\n"
-            "\t--font \"fontName\" set a font for output string. Font name must be without .af extension. For example: --font test\n"
+            "\t--font \"fontName\" set font for output string. Font name must be without .af extension. For example: --font test\n"
             "\t-p0 put Off space between symbols\n"
             "\t-p1 put On space between symbols\n"
             "\t--Red change output text color\n"
