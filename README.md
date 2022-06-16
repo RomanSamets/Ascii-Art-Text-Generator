@@ -38,7 +38,6 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 ### All options:
   * `-f "fontName"` OR `--font` set a font for output string
   * `-h` OR `--help` print a reduced documentation
-  * `-p0` OR `--padding0` put Off space between symbols
   * `-p1` OR `--padding1` put On space between symbols
   * `--Red` change output text color
   * `--Blue` change output text color
@@ -50,9 +49,7 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
   * `-l` OR `--left` print output by left side
   * `-r` OR `--right` print output by right side
   * `-c` OR `--center` print output by center
-  * `-lk0` OR `--likeAcom0` like a comment mode off
   * `-lk1` OR `--likeAcom1` like a comment mode on
-  * `-rp0` OR `--replace0` doesn't replace symbol space to dot
   * `-rp1` OR `--replace1` replace symbol space to dot
   * `-wt` OR `--widthTerm` set a width equals a terminal width
   * `-w integerValue` OR `--width` set a width by hand 

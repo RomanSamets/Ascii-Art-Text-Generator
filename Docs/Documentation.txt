@@ -29,7 +29,6 @@ Syntax:
 All Options:
   -f "nameOfFont" font name. Font name must be without .af extension. For example: --font test
   -h print a documentation for you
-  -p0 put Off space between symbols
   -p1 put On space between symbols
   --Red change output text color
   --Blue change output text color
@@ -41,14 +40,12 @@ All Options:
   -l print output by left side
   -r print output by right side
   -c print output by center
-  -lk0 like a comment mode off
   -lk1 like a comment mode on
-  -rp0 doesn't replace symbol space to dot
   -rp1 replace symbol space to dot
   -wt set a width equals a terminal width
   -w integerValue set a width by hand
+  
   In beta:
-  -s0 turn off a smashing mode
   -s1 turn on a smashing mode 
 
 -------------------------------------------------------------
@@ -103,7 +100,7 @@ For using your font you need:
 !!! fontName must be without .af
 
 Example:
-aat -f test Hiii
+aat -f myfont Hiii
 
 ---------------------------
 For using like a library
@@ -112,7 +109,7 @@ For using like a library
 3 Now use aat in your project. Example:
   - For using a aat you need call a printAsciiArtText function with 2 arguments. Example:
 
-    printAsciiArtText("hiii", aat_parameters);
+    printAsciiArtText("hiii", aatParameters);
 
     OR
 
@@ -121,34 +118,25 @@ For using like a library
     ! ARGUMENTS MUST BE 2
     ! FIRST IT'S A STRING
     ! SECOND IT'S A STRUCTURE OF PARAMETERS
-    note: aat it's a define. #define aat aat_parameters. aat_parameters it's a struct
+    note: aat it's a define. #define aat aatParameters. aatParameters it's a struct
 
     For using options you can do:
       aat.<optionName> = <value>;
       printAsciiArtText("hiii", aat);
 
+    for using utility aat have macroses 
+    ON and OFF or on and off 
+    CENTER or center or LEFT or left or RIGHT or right
+
     Options In AAT LIBRARY:
-      1  fontName = <Value string: "roman">
-      2  isPaddingEnable = <Values: 1 or 0>
-      3  color = <Value: 0 or 1 or 2 or 3 or 4 or 5 or 6 or 7>
-         0 - default
-         1 - Red
-         2 - Green
-         3 - Yello
-         4 - Blue
-         5 - Purpl
-         6 - Cyan
-         7 - Black
-      4  outputAlignment = <Values: 0 or 1 or 2> 
-        0 it's left 
-        1 it's center 
-        2 it's right
-      5  isLikeAComment = <Values: 1 or 0>
-      6  isChangeSpace = <Values: 1 or 0>
+      1  font = <Value string: "roman">
+      2  isPaddingEnable = <Values: ON or OFF>
+      3  color = DEFAULT or RED or GREEN or YELLOW or BLUE or PURPLE or CYAN or BLACK
+      4  outputAlignment = <Values: LEFT or CENTER or RIGHT> 
+      5  isLikeAComment = <Values: ON or OFF>
+      6  isChangeSpace = <Values: ON or OFF>
       7  windowWidth = <integerValue: 123>
-      8  replacedSymbol = <Value 1 symbol: 'd'>      
+      8  replacedSymbol = <Value symbol: 'd'> MUST TO BE TURN ON OPTION TO THIS OPTION WORK <isChangeSpace>  
 
 4 Compile your project with this library 
-  gcc -c AAT_libsource.c -o AAT.o && ar rcs lib_AAT<win or lin>.a AAT.o
-
 5 Enjoy :)

@@ -4,46 +4,51 @@
 #include <stdlib.h>
 #include <ctype.h>
 
-#define MAXUSERSTRSIZE 20
+#include "AAT.h"
 
-char* fileToOpen;
-
-struct AAT_parameters {
-	char* fontName;
-	int isPaddingEnable; 
-	int color;
-	int outputAlignment;
-	int isLikeAComment; 
-	int isChangeSpace;
-	int windowWidth;
-	char replacedSymbol;
+struct AAT_parameters aatParameters = {
+	_SYMBOL_WIDTH, 
+	_SYMBOL_HEIGHT, 
+	_SYMBOLS, 
+	DEFAULT, 
+	CENTER, 
+	TERMINAL_WINDOW_DEFAULT_WIDTH, 
+	OFF, 
+	OFF, 
+	OFF, 
+	OFF,
+	' ', 
+	DEFAULT_FONT
 };
 
-const unsigned short symbolWidth = 30;
-const unsigned short symbolHeight = 10;
-const unsigned short symbols = 95;
+void defineSymbols(unsigned short userStrSymbolCounts, short asciiUserIndexSymbol[MAX_USER_STR_SIZE], char userStr[MAX_USER_STR_SIZE]);
+void parseData(FILE* sourceFile, char font[aatParameters.SYMBOLS][aatParameters.SYMBOL_HEIGHT][aatParameters.SYMBOL_WIDTH]);
+const char* setFont(const char* font);
 
-void defineSymbols(unsigned short symbolCounts, short asciiUserIndexSymbol[MAXUSERSTRSIZE], char userStr[MAXUSERSTRSIZE]);
-const char* setFont(const char* fontName);
-void parseData(int symbols, int symbolHeight, int symbolWidth, FILE* sourceFile, char font[symbols][symbolHeight][symbolWidth]);
-
-
-int printAsciiArtText(char* userStr, struct AAT_parameters aat_parameters) {
+int printAsciiArtText(char* userStr, struct AAT_parameters aatParameters) {
 	FILE* sourceFile = NULL;
-	
-	char font[symbols][symbolHeight][symbolWidth];
 
-	sourceFile = fopen(setFont(aat_parameters.fontName), "r");
-    if (sourceFile == NULL) {printf("\nError: %25s", "Can't open file");return 1;}
-    free(fileToOpen);
+	char font[aatParameters.SYMBOLS][aatParameters.SYMBOL_HEIGHT][aatParameters.SYMBOL_WIDTH];
 
-    parseData(symbols, symbolHeight, symbolWidth, sourceFile, font);
+	if (strlen(userStr) > MAX_USER_STR_SIZE) {
+		printf("Error: string too long");
+		return EXIT_FAILURE;
+	}
+
+    if (( sourceFile = fopen(setFont(aatParameters.font), "r") ) == NULL) {
+        printf("\nError: %25s", "Can't open file\n");
+        return EXIT_FAILURE;
+    }
+
+    parseData(sourceFile, font);
     fclose(sourceFile);
 
-	if (userStr[0] == 1) {return 0;}
+	if (userStr[0] == 1) {
+		return EXIT_SUCCESS;
+	}
 
-	short asciiUserIndexSymbol[MAXUSERSTRSIZE];
-	unsigned short symbolCounts = strlen(userStr);
+	short asciiUserIndexSymbol[MAX_USER_STR_SIZE];
+	unsigned short userStrSymbolCounts = strlen(userStr);
 
 	char paddingSymbol;
 
@@ -54,51 +59,66 @@ int printAsciiArtText(char* userStr, struct AAT_parameters aat_parameters) {
 	int nextLine = 0;
 	int spaces = 0;
 
-	switch(aat_parameters.color) {
-		case 1: printf("\033[0;31m"); break; // Red
-		case 2: printf("\033[0;32m"); break; // Green
-		case 3: printf("\033[0;33m"); break; // Yellow
-		case 4: printf("\033[0;34m"); break; // Blue
-		case 5: printf("\033[0;35m"); break; // Purple
-		case 6: printf("\033[0;36m"); break; // Cyan
-		case 7: printf("\033[0;30m"); break; // Black
-		default: printf("\033[0m"); break;
-	}
+    switch(aatParameters.color) {
+        case RED    : printf(CSI"0;31m"); break;
+        case GREEN  : printf(CSI"0;32m"); break;
+        case YELLOW : printf(CSI"0;33m"); break;
+        case BLUE   : printf(CSI"0;34m"); break;
+        case PURPLE : printf(CSI"0;35m"); break;
+        case CYAN   : printf(CSI"0;36m"); break;
+        case BLACK  : printf(CSI"0;30m"); break;
+        default     : printf(CSI"0m");    break;
+    }
 
-	if (aat_parameters.isLikeAComment == 1) {printf("/***\n");}
+    if (aatParameters.isLikeAComment == ON) {
+        printf("/***\n");
+    }
 
-	if (aat_parameters.isChangeSpace == 1) {paddingSymbol = aat_parameters.replacedSymbol;} 
-	else {paddingSymbol = ' ';}
+    if (aatParameters.isChangeSpace == ON) {
+        paddingSymbol = aatParameters.replacedSymbol;
+    } else {
+        paddingSymbol = ' ';
+    }
  	
-    defineSymbols(symbolCounts, asciiUserIndexSymbol, userStr);
+    defineSymbols(userStrSymbolCounts, asciiUserIndexSymbol, userStr);
 
-	for (int i = 0; i < symbolCounts; ++i) {
-		if (aat_parameters.isPaddingEnable == 1) {
-			totalAsciiStrWidth += strlen(font[asciiUserIndexSymbol[i]][nextLine]) + 1;
-			if (totalAsciiStrWidth > aat_parameters.windowWidth) {nonAvaible++;}
-		} else {
-			totalAsciiStrWidth += strlen(font[asciiUserIndexSymbol[i]][nextLine]);
-			if (totalAsciiStrWidth > aat_parameters.windowWidth) {nonAvaible++;}
-		}
-	}
+    for (int i = 0; i < userStrSymbolCounts; ++i) {
+        if (aatParameters.isPaddingEnable == ON) {
+            totalAsciiStrWidth += strlen(font[asciiUserIndexSymbol[i]][nextLine]) + 1;
+            if (totalAsciiStrWidth > aatParameters.windowWidth) {
+                nonAvaible++;
+            }
+        } else {
+            totalAsciiStrWidth += strlen(font[asciiUserIndexSymbol[i]][nextLine]);
+            if (totalAsciiStrWidth > aatParameters.windowWidth) {
+                nonAvaible++;
+            }
+        }
+    }
 
-	for (int i = 0; i < symbolHeight; ++i) {
+    if (totalAsciiStrWidth > 233 && totalAsciiStrWidth != 233) {
+        printf("Change a last symbol. String is too long.\n");
+        return EXIT_FAILURE;
+    }
+
+	for (int i = 0; i < aatParameters.SYMBOL_HEIGHT; ++i) {
 		
-		if(aat_parameters.outputAlignment == 1) {for (int i = 0; i < (((round(aat_parameters.windowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
-		if(aat_parameters.outputAlignment == 2) {for (int i = 0; i < ((round(aat_parameters.windowWidth - totalAsciiStrWidth))-3); ++i) {printf("%c", paddingSymbol);}}
+		if (aatParameters.outputAlignment == CENTER) {for (int i = 0; i < (((round(aatParameters.windowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
+		if (aatParameters.outputAlignment == RIGHT) {for (int i = 0; i < ((round(aatParameters.windowWidth - totalAsciiStrWidth))-3); ++i) {printf("%c", paddingSymbol);}}
 		
-		for (int i = 0; i < symbolCounts-nonAvaible; ++i) {
-
+		for (int i = 0; i < userStrSymbolCounts - nonAvaible; ++i) {
 			for (int i = 0; i < strlen(font[asciiUserIndexSymbol[nextSymbol]][nextLine]); ++i) {
-				if (aat_parameters.isChangeSpace == 1) {
-					if (font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] == ' ') {
-						font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] = aat_parameters.replacedSymbol;
-					}	
-				}
+                if (aatParameters.isChangeSpace == ON) { // && aatParameters.isSmashing == OFF
+                    if (font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] == ' ') {
+                        font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] = aatParameters.replacedSymbol;
+                    }   
+                }
 				printf("%c", font[asciiUserIndexSymbol[nextSymbol]][nextLine][i]);	
 			}
 			
-			if (aat_parameters.isPaddingEnable == 1) {printf("%c", paddingSymbol);} 
+            if (aatParameters.isPaddingEnable == ON) {
+                printf("%c", paddingSymbol);
+            } 
 
 			++nextSymbol;
 			savedSymbol = nextSymbol;
@@ -106,30 +126,30 @@ int printAsciiArtText(char* userStr, struct AAT_parameters aat_parameters) {
 
 		printf("\n");
 		++nextLine;
-		nextSymbol=0;	
+		nextSymbol = 0;	
 	}
 
-	if (totalAsciiStrWidth > aat_parameters.windowWidth) {
+	if (totalAsciiStrWidth > aatParameters.windowWidth) {
 		int nonAvaibleSymbol = savedSymbol;
 
-		for (int i = 0; i < symbolHeight; ++i) {
+		for (int i = 0; i < aatParameters.SYMBOL_HEIGHT; ++i) {
 
-			if (aat_parameters.outputAlignment == 1) {for (int i = 0; i < (((round(aat_parameters.windowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
-			if (aat_parameters.outputAlignment == 2) {for (int i = 0; i < ((round(aat_parameters.windowWidth - totalAsciiStrWidth))); ++i) {printf("%c", paddingSymbol);}}
-
+		if (aatParameters.outputAlignment == CENTER) {for (int i = 0; i < (((round(aatParameters.windowWidth - totalAsciiStrWidth))/2)-3); ++i) {printf("%c", paddingSymbol);}}
+		if (aatParameters.outputAlignment == RIGHT) {for (int i = 0; i < ((round(aatParameters.windowWidth - totalAsciiStrWidth))-3); ++i) {printf("%c", paddingSymbol);}}
+		
 			for (int i = 0; i < nonAvaible; ++i) {
-
 				for (int i = 0; i < strlen(font[asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine]); ++i) {
-
-					if (aat_parameters.isChangeSpace == 1) {
-						if (font[asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i] == ' ') {
-							font[asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i] = aat_parameters.replacedSymbol;
-						}	
-					}
+	                if (aatParameters.isChangeSpace == ON) { // && aatParameters.isSmashing == OFF
+	                    if (font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] == ' ') {
+	                        font[asciiUserIndexSymbol[nextSymbol]][nextLine][i] = aatParameters.replacedSymbol;
+	                    }   
+	                }
 					printf("%c", font[asciiUserIndexSymbol[nonAvaibleSymbol]-1][nextLine][i]);	
 				}
 				
-				if (aat_parameters.isPaddingEnable == 1) {printf("%c", paddingSymbol);} 
+                if (aatParameters.isPaddingEnable == ON) {
+                    printf("%c", paddingSymbol);
+                } 
 
 				++nonAvaibleSymbol;
 			}
@@ -140,40 +160,43 @@ int printAsciiArtText(char* userStr, struct AAT_parameters aat_parameters) {
 		}
 	}
 
-	if (aat_parameters.isLikeAComment == 1) {printf("***/\n");}
+	if (aatParameters.isLikeAComment == ON) {
+        printf("***/\n");
+    }
 
 	//Reset color Settings
 	printf("\033[0m");	
+
+	return EXIT_SUCCESS;
 }
 
-const char* setFont(const char* fontName) {
-    char fileName[16]; 
+const char* setFont(const char* argv) {
+    static char fileToOpen[FONT_NAME_STR_SIZE+FONT_EXTENSION_LEN+FONTS_DIRECTION_LEN+1]; 
+    char fileName[FONT_NAME_STR_SIZE];
 
-    strcpy(fileName, fontName);
+    strcpy(fileName, argv);
     
-    fileToOpen = malloc(sizeof(fileName)+4+6); // 4 it's a extenstion str len with nul symbol 6 it's a Fonts/ size
-    
-    strcpy(fileToOpen, "Fonts/");
+    strcpy(fileToOpen, DEFAULT_FONTS_DIRECTORY);
     strcat(fileToOpen, fileName); 
-    strcat(fileToOpen, ".af"); 
+    strcat(fileToOpen, DEFAULT_FONT_EXTENSION); 
 
     return fileToOpen;
 }
 
-void parseData(int symbols, int symbolHeight, int symbolWidth, FILE* sourceFile, char font[symbols][symbolHeight][symbolWidth]) {
-    char buf[symbolWidth];
+void parseData(FILE* sourceFile, char font[aatParameters.SYMBOLS][aatParameters.SYMBOL_HEIGHT][aatParameters.SYMBOL_WIDTH]) { 
+    char buf[aatParameters.SYMBOL_WIDTH];
 
-    for (int s = 0; s < symbols; ++s) {
-        for (int h = 0; h < symbolHeight; ++h) {
-            fgets(buf, symbolWidth, sourceFile);
+    for (int s = 0; s < aatParameters.SYMBOLS; ++s) {
+        for (int h = 0; h < aatParameters.SYMBOL_HEIGHT; ++h) {
+            fgets(buf, aatParameters.SYMBOL_WIDTH, sourceFile);
             strcpy(buf, strtok(buf, "%"));
             strcpy(font[s][h], buf);
         }
     }
 }
 
-void defineSymbols(unsigned short symbolCounts, short asciiUserIndexSymbol[MAXUSERSTRSIZE], char userStr[MAXUSERSTRSIZE]) {
-    for (int csi = 0; csi < symbolCounts; ++csi) {
+void defineSymbols(unsigned short userStrSymbolCounts, short asciiUserIndexSymbol[MAX_USER_STR_SIZE], char userStr[MAX_USER_STR_SIZE]) {
+    for (int csi = 0; csi < userStrSymbolCounts; ++csi) {
         switch(userStr[csi]) {
 			case 'A':  asciiUserIndexSymbol[csi] = 0;  break;
 			case 'a':  asciiUserIndexSymbol[csi] = 1;  break;
