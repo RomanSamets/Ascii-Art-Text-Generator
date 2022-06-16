@@ -36,23 +36,22 @@ Open terminal and write `aat hi` OR just write a `aat` and then put in a string.
 2. RECOMENDED USE `""` FOR YOUR STRING ARGUMENT BUT YOU CAN USE JUST A SYMBOLS BUT WITHOUT SPACE
 
 ### All options:
-  * `-f "fontName"` OR `--font` set a font for output string
-  * `-h` OR `--help` print a reduced documentation
-  * `-p1` OR `--padding1` put On space between symbols
-  * `--Red` change output text color
-  * `--Blue` change output text color
-  * `--Yellow` change output text color
-  * `--Cyan` change output text color
-  * `--Purple` change output text color
-  * `--Black` change output text color
-  * `--Green` change output text color
-  * `-l` OR `--left` print output by left side
-  * `-r` OR `--right` print output by right side
-  * `-c` OR `--center` print output by center
+  * `--font "fontName"` OR `-f "fontName"` set a font for output string
+  * `--help` OR `-h` print a reduced documentation
+  * `--padding1` OR `-p1` put On space between symbols
+  * `--red` change output text color
+  * `--blue` change output text color
+  * `--yellow` change output text color
+  * `--cyan` change output text color
+  * `--purple` change output text color
+  * `--black` change output text color
+  * `--green` change output text color
+  * `--left` OR `-l` print output by left side
+  * `--right` OR `-r` print output by right side
+  * `--center` OR `-c` print output by center
   * `-lk1` OR `--likeAcom1` like a comment mode on
   * `-rp1` OR `--replace1` replace symbol space to dot
-  * `-wt` OR `--widthTerm` set a width equals a terminal width
-  * `-w integerValue` OR `--width` set a width by hand 
+  * `--width integerValue` OR `-w integerValue` set a width by hand 
 
 > #### For creating your own font read a documentation file in Docs folder
 
